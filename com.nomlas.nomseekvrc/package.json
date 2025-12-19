@@ -1,7 +1,7 @@
 {
   "name": "com.nomlas.nomseekvrc",
   "displayName": "NomSeek For VRC",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "unity": "2022.3",
   "documentationUrl": "https://github.com/nomlasvrc/NomSeekVRC",
   "changelogUrl": "https://github.com/nomlasvrc/NomSeekVRC/releases",
