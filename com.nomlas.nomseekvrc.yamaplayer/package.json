@@ -6,7 +6,8 @@
   "description": "NomSeek YamaPlayer Connector by nomlasvrc",
   "vpmDependencies": {
     "com.vrchat.worlds": "3.x.x",
-    "com.nomlas.nomseekvrc": "0.x.x"
+    "com.nomlas.nomseekvrc": "0.x.x",
+    "net.kwxxw.yama-stream": "x.x.x"
   },
   "author": {
     "name": "Nomlas"
