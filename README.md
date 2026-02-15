@@ -9,11 +9,16 @@ VRChatワールド向けの動画検索アセットです。
 
 ### 使い方
 1. [VPM](https://nomlasvrc.github.io/nomlas-package-listing/)に追加
-2. VCCやALCOMでインポート
-3. `NomSeek For VRC/Runtime`にある`VRCURL Setter.prefab`を開く
-4. 画面の指示に従い、VRCURLを生成した後、prefabを保存
-5. `NomSeekForVRC.prefab`をシーン上に配置
-6. Connectorを指定
+1. VCCやALCOMでインポート
+1. Unityを開く
+1. `NomSeek For VRC/Runtime`にある`VRCURL Setter.prefab`を開く
+1. 画面の指示に従い、VRCURLを生成した後、prefabを保存
+1. `NomSeekForVRC.prefab`をシーン上に配置
+1. コネクター（connector）を設定
+    1. 使用する動画プレイヤーに対応するコネクターをVCC/ALCOMでインポート
+    1. `NomSeek XXX Connector/Runtime`にあるConnector.prefabをシーン上に配置
+    1. インスペクターを開き、空欄部分を埋める
+    1. コネクターをNomSeekForVRCの`Connector`欄に指定
 > [!IMPORTANT]
 > 上記の指示に従わないと、大量の（デフォルトでは10000個）VRCURLが、prefabではなくシーンに保存されます。Unityエディターが非常に重くなりますので、上記の指示に従って使用することを強くお勧めします。
 
