@@ -91,7 +91,7 @@ namespace Nomlas.NomSeekVRC.Editor
         private static void DrawConsentSection()
         {
             EditorGUILayout.LabelField("API 利用同意", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("本アセットは、Lamp氏が提供する「VRChat YouTube Search API」を使用しています。\n本アセットおよび当該APIの利用または利用不能に起因して利用者に発生した損害（直接的・間接的・特別・偶発的・結果的損害を含むがこれらに限りません）について、製作者である「のむらす」は一切の責任を負わないものとします。\n以上に同意しますか？", MessageType.Warning);
+            EditorGUILayout.HelpBox(consentText + "\n以上に同意しますか？", MessageType.Warning);
 
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("同意しない"))
@@ -150,5 +150,8 @@ namespace Nomlas.NomSeekVRC.Editor
             const string pattern = @"^[a-z0-9_-]+$";
             return Regex.IsMatch(worldId, pattern);
         }
+
+        // 以下の文章を変更してはなりません。
+        private const string consentText = "本アセットは、Lamp氏が提供する「VRChat YouTube Search API」を使用しています。\n本アセットおよび当該APIの利用または利用不能に起因して利用者に発生した損害（直接的・間接的・特別・偶発的・結果的損害を含むがこれらに限りません）について、製作者である「のむらす」は一切の責任を負わないものとします。";
     }
 }
