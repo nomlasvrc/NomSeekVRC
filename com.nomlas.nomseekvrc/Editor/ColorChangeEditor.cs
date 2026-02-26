@@ -56,16 +56,6 @@ namespace Nomlas.NomSeekVRC.Editor
                         var preset = presetObj.presets[selectedPresetIndex];
                         imagesColorProp.colorValue = preset.imageColor;
                         textColorProp.colorValue = preset.textColor;
-                        serializedObject.ApplyModifiedProperties();
-
-                        // Prefab対応
-                        PrefabUtility.RecordPrefabInstancePropertyModifications(target);
-                        EditorUtility.SetDirty(target);
-                        if (!Application.isPlaying)
-                        {
-                            EditorSceneManager.MarkSceneDirty(
-                                UnityEngine.SceneManagement.SceneManager.GetActiveScene());
-                        }
                     }
                 }
             }
@@ -77,34 +67,35 @@ namespace Nomlas.NomSeekVRC.Editor
             EditorGUILayout.Space(10);
 
             EditorGUILayout.LabelField("Target Objects", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(imagesProp, new GUIContent("Images"), true);
-            EditorGUILayout.PropertyField(textsProp, new GUIContent("Texts"), true);
-            EditorGUILayout.PropertyField(iconsProp, new GUIContent("Icons"), true);
+            EditorGUILayout.PropertyField(imagesProp, true);
+            EditorGUILayout.PropertyField(textsProp, true);
+            EditorGUILayout.PropertyField(iconsProp, true);
 
             EditorGUILayout.Space(10);
 
             EditorGUILayout.LabelField("Colors", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(imagesColorProp, new GUIContent("Images Color"));
-            EditorGUILayout.PropertyField(textColorProp, new GUIContent("Text/Icon Color"));
+            EditorGUILayout.PropertyField(imagesColorProp);
+            EditorGUILayout.PropertyField(textColorProp);
 
             EditorGUILayout.Space(10);
 
             if (GUILayout.Button("Apply Color To Objects"))
             {
                 Undo.RecordObject(target, "Apply Color To Objects");
-                (target as ColorChanger).ApplyColor();
 
-                // Prefab対応
-                PrefabUtility.RecordPrefabInstancePropertyModifications(target);
-                EditorUtility.SetDirty(target);
+                serializedObject.ApplyModifiedProperties();
+
+                var changer = (ColorChanger)target;
+                changer.ApplyColor();
+
+                EditorUtility.SetDirty(changer);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(changer);
+
                 if (!Application.isPlaying)
                 {
-                    EditorSceneManager.MarkSceneDirty(
-                        UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+                    EditorSceneManager.MarkSceneDirty(changer.gameObject.scene);
                 }
             }
-
-            EditorGUILayout.HelpBox("色の変更が保存されない時はPrefab展開してください。", MessageType.Info);
 
             serializedObject.ApplyModifiedProperties();
         }
