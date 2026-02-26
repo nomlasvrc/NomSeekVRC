@@ -18,5 +18,7 @@ namespace Nomlas.NomSeekVRC
             byte index = 1;
             if (Utilities.IsValid(handler)) handler.PlayUrl(vrcUrl, null, title, index);
         }
+
+        public override bool IsValid => Utilities.IsValid(handler);
     }
 }

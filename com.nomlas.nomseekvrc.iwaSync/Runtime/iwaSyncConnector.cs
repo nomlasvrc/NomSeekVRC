@@ -30,6 +30,8 @@ namespace Nomlas.NomSeekVRC
             core.PlayURL(_mode, vrcUrl);
             core.RequestSerialization();
         }
+
+        public override bool IsValid => core != null;
     }
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP

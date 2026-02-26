@@ -28,7 +28,7 @@ namespace Nomlas.NomSeekVRC
             loadingGameObject.SetActive(true);
             loadingTitle.text = "エラーが発生しました！";
             status.text = message;
-            SendCustomEventDelayedSeconds(nameof(HideLoading), 2);
+            SendCustomEventDelayedSeconds(nameof(HideLoading), 3);
         }
 
         public void HideLoading()

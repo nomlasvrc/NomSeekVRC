@@ -1,4 +1,4 @@
-﻿
+
 using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Components;
@@ -65,8 +65,30 @@ namespace Nomlas.NomSeekVRC
         private VRCUrl[] vrcurlPool;
         // ----------------
 
+        private bool CheckIsValid()
+        {
+            if (!(Utilities.IsValid(vrcurlSetter) && vrcurlSetter.IsValid()))
+            {
+                E("VRCURLSetter");
+                return false;
+            }
+            if (!(Utilities.IsValid(connector) && connector.IsValid))
+            {
+                E("Connector");
+                return false;
+            }
+            return true;
+        }
+
+        private void E(string fieldName)
+        {
+            Debug.LogError($"{fieldName}が正しく設定されていません。ワールド製作者にお問い合わせください。");
+            ErrorMessage($"{fieldName}が正しく設定されていません。ワールド製作者にお問い合わせください。");
+        }
+
         private void Start()
         {
+            CheckIsValid();
             _imageDownloader = new VRCImageDownloader();
             vrcurlPool = vrcurlSetter.VRCUrls;
             defaultVRCUrl = vrcurlSetter.DefaultVRCUrl;
@@ -94,6 +116,7 @@ namespace Nomlas.NomSeekVRC
 
         private void Search(ProcessMode _processMode, VRCUrl url)
         {
+            if (!CheckIsValid()) return;
             processMode = _processMode;
             Progress(true, 0.1f, "動画情報を取得中");
             VRCStringDownloader.LoadUrl(url, (IUdonEventReceiver)this);

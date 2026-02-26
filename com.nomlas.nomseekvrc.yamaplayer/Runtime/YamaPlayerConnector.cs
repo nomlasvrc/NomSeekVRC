@@ -27,5 +27,7 @@ namespace Nomlas.NomSeekVRC
                 yamaController.Queue.AddTrack(track);
             }
         }
+
+        public override bool IsValid => yamaController != null;
     }
 }
