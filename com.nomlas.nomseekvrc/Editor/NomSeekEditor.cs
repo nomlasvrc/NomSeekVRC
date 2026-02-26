@@ -1,6 +1,6 @@
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using VRC.SDKBase.Editor.BuildPipeline;
 
 namespace Nomlas.NomSeekVRC.Editor
 {
@@ -12,35 +12,36 @@ namespace Nomlas.NomSeekVRC.Editor
             var nomSeek = target as NomSeek;
             DrawDefaultInspector();
 
-            if (!IsReady(nomSeek))
-            {
-                EditorGUILayout.Space();
-                EditorGUILayout.HelpBox("VRCURLSetterの設定が完了していません！", MessageType.Warning);
-            }
-        }
+            if (nomSeek == null) return;
 
-        public static bool IsReady(NomSeek nomSeek)
-        {
-            return nomSeek.vrcurlSetter != null && nomSeek.vrcurlSetter.IsValid() && VRCURLSetterEditor.IsAgreed();
-        }
-    }
-
-    public class VRCSDKBuildCallback : IVRCSDKBuildRequestedCallback
-    {
-        public int callbackOrder => -1;
-        public bool OnBuildRequested(VRCSDKRequestedBuildType requestedBuildType)
-        {
-            NomSeek[] nomSeeks = Object.FindObjectsOfType<NomSeek>();
-            
-            foreach (var nomSeek in nomSeeks)
+            if (nomSeek.vrcurlSetter == null)
             {
-                if (!NomSeekEditor.IsReady(nomSeek))
+                string prefabPath = $"{NomSeekPrefabCreatorWindow.OutputDirectory}/{NomSeekPrefabCreatorWindow.PrefabName}.prefab";
+                if (File.Exists(prefabPath))
                 {
-                    EditorUtility.DisplayDialog("操作が完了していません", $"NomSeek For VRCのURL生成インスペクターで操作を完了してください。\n「OK」をクリックするとビルドを中止します。", "OK");
-                    return false;
+                    EditorGUILayout.HelpBox("作成したVRCURLSetter.prefabをシーン上に配置し、指定してください。", MessageType.Info);
+                    if (GUILayout.Button("Prefabを自動設定"))
+                    {
+                        Object prefab = AssetDatabase.LoadAssetAtPath<Object>(prefabPath);
+                        if (prefab != null)
+                        {
+                            Undo.RecordObject(nomSeek, "Assign VRCURLSetter Prefab");
+                            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, nomSeek.gameObject.transform);
+                            nomSeek.vrcurlSetter = instance.GetComponent<VRCURLSetter>();
+                            EditorUtility.SetDirty(nomSeek);
+                        }
+                    }
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox("VRCURLSetter.prefabが見つかりません。Prefab Creatorで作成してください。", MessageType.Info);
+
+                    if (GUILayout.Button("Prefab Creatorを開く"))
+                    {
+                        NomSeekPrefabCreatorWindow.OpenWindow();
+                    }
                 }
             }
-            return true;
         }
     }
 }
