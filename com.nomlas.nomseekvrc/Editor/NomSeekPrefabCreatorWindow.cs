@@ -82,7 +82,6 @@ namespace Nomlas.NomSeekVRC.Editor
                 return;
             }
 
-            Selection.activeObject = savedPrefab;
             EditorGUIUtility.PingObject(savedPrefab);
             EditorUtility.DisplayDialog("Success", $"Prefabを保存しました:\n{prefabPath}", "OK");
             DestroyImmediate(go);

@@ -14,6 +14,22 @@
     "precompiledReferences": [],
     "autoReferenced": false,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.nomlas.nomseekvrc.iwasync",
+            "expression": "",
+            "define": "IWASYNC_CONNECTOR"
+        },
+        {
+            "name": "com.nomlas.nomseekvrc.vizvid",
+            "expression": "",
+            "define": "VIZVID_CONNECTOR"
+        },
+        {
+            "name": "com.nomlas.nomseekvrc.yamaplayer",
+            "expression": "",
+            "define": "YAMA_CONNECTOR"
+        }
+    ],
     "noEngineReferences": false
 }
