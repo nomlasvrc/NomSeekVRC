@@ -144,10 +144,20 @@ namespace Nomlas.NomSeekVRC
             }
         }
 
+        private const string untrustedUrlMessage = "Not trusted url hit: Access Denied";
         public override void OnStringLoadError(IVRCStringDownload result)
         {
-            Debug.LogError($"Error loading string: {result.ErrorCode} - {result.Error}");
-            ErrorMessage($"URLの読み込みに失敗しました: {result.ErrorCode} - {result.Error}");
+            if (result.Error == untrustedUrlMessage)
+            {
+                Debug.LogError($"Untrusted URL error: {result.Url}");
+                ErrorMessage($"VRChatの設定 -> 「快適性とセーフティ」 -> 「信頼されていないURLを許可」 をオンにしてください。", 10);
+                return;
+            }
+            else
+            {
+                Debug.LogError($"Error loading string: {result.ErrorCode} - {result.Error}");
+                ErrorMessage($"URLの読み込みに失敗しました: {result.ErrorCode} - {result.Error}");
+            }
         }
 
         public override void OnImageLoadError(IVRCImageDownload result)

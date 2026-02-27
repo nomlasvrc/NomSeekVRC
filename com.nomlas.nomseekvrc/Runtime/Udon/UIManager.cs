@@ -23,12 +23,12 @@ namespace Nomlas.NomSeekVRC
             progressSlider.value = 0.5f + (progress * 0.4f); //基本的に値の変更は非推奨。
         }
 
-        protected void ErrorMessage(string message)
+        protected void ErrorMessage(string message, int showTime = 3)
         {
             loadingGameObject.SetActive(true);
             loadingTitle.text = "エラーが発生しました！";
             status.text = message;
-            SendCustomEventDelayedSeconds(nameof(HideLoading), 3);
+            SendCustomEventDelayedSeconds(nameof(HideLoading), showTime);
         }
 
         public void HideLoading()
