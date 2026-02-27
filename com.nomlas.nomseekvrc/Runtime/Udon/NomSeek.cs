@@ -15,7 +15,7 @@ namespace Nomlas.NomSeekVRC
     {
         [Space]
         [SerializeField] internal VRCURLSetter vrcurlSetter;
-        [SerializeField] private NomSeekConnector connector;
+        [SerializeField] internal NomSeekConnector connector;
         [Space]
         [SerializeField] private RectTransform content;
         [SerializeField] private GameObject template;

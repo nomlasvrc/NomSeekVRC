@@ -111,6 +111,10 @@ namespace Nomlas.NomSeekVRC.Editor
             if (vizVid && GUILayout.Button("VizVid Connector")) EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath<Object>(vizVidPath));
             if (yamaPlayer && GUILayout.Button("YamaPlayer Connector")) EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath<Object>(yamaPlayerPath));
             EditorGUILayout.HelpBox("コネクターをシーン上に配置し、適切な連携設定を行った後、「Connector」欄に指定してください。", MessageType.Info);
+            if (nomSeek.connector!=null && !nomSeek.connector.IsValid)
+            {
+                EditorGUILayout.HelpBox("指定されたコネクターが正しく設定されていません。", MessageType.Warning);
+            }
         }
     }
 }
