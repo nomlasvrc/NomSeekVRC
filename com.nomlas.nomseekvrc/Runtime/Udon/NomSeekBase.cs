@@ -5,6 +5,7 @@ using VRC.SDK3.Data;
 
 namespace Nomlas.NomSeekVRC
 {
+    [HelpURL("https://github.com/nomlasvrc/NomSeekVRC")]
     public class NomSeekBase : UdonSharpBehaviour
     {
         private const string liveSuffix = "<color=yellow>Live</color>";
