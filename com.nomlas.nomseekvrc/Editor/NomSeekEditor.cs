@@ -29,16 +29,9 @@ namespace Nomlas.NomSeekVRC.Editor
                 if (File.Exists(prefabPath))
                 {
                     EditorGUILayout.HelpBox("作成したVRCURLSetter.prefabをシーン上に配置し、指定してください。", MessageType.Info);
-                    if (GUILayout.Button("Prefabを自動設定"))
+                    if (GUILayout.Button("Prefabを開く"))
                     {
-                        Object prefab = AssetDatabase.LoadAssetAtPath<Object>(prefabPath);
-                        if (prefab != null)
-                        {
-                            Undo.RecordObject(nomSeek, "Assign VRCURLSetter Prefab");
-                            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, nomSeek.gameObject.transform);
-                            nomSeek.vrcurlSetter = instance.GetComponent<VRCURLSetter>();
-                            EditorUtility.SetDirty(nomSeek);
-                        }
+                        EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath<Object>(prefabPath));
                     }
                 }
                 else
