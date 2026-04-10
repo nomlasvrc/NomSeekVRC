@@ -31,7 +31,9 @@ namespace Nomlas.NomSeekVRC.Editor
                     EditorGUILayout.HelpBox("作成したVRCURLSetter.prefabをシーン上に配置し、指定してください。", MessageType.Info);
                     if (GUILayout.Button("Prefabを開く"))
                     {
-                        EditorGUIUtility.PingObject(AssetDatabase.LoadAssetAtPath<Object>(prefabPath));
+                        var prefab = AssetDatabase.LoadAssetAtPath<Object>(prefabPath);
+                        Selection.activeObject = prefab;
+                        EditorGUIUtility.PingObject(prefab);
                     }
                 }
                 else
