@@ -112,10 +112,16 @@ namespace Nomlas.NomSeekVRC.Editor
                     nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, vizVidPath);
                     EditorUtility.SetDirty(nomSeek);
                 }
-                if (yamaPlayer && GUILayout.Button("YamaPlayer Connector"))
+                if (yamaPlayer)
                 {
-                    nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, yamaPlayerPath);
-                    EditorUtility.SetDirty(nomSeek);
+                    EditorGUILayout.HelpBox("YamaPlayerからモジュールとして追加して設定してください。", MessageType.Info);
+                    EditorGUI.BeginDisabledGroup(true);
+                    if (GUILayout.Button("YamaPlayer Connector"))
+                    {
+                        nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, yamaPlayerPath);
+                        EditorUtility.SetDirty(nomSeek);
+                    }
+                    EditorGUI.EndDisabledGroup();
                 }
                 EditorGUILayout.HelpBox("コネクターをシーン上に配置し、適切な連携設定を行った後、「Connector」欄に指定してください。", MessageType.Info);
             }
