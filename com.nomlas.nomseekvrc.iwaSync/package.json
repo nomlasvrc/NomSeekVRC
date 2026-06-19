@@ -1,12 +1,12 @@
 {
   "name": "com.nomlas.nomseekvrc.iwasync",
   "displayName": "NomSeek iwaSync Connector",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "unity": "2022.3",
   "description": "NomSeek iwaSync Connector by nomlasvrc",
   "vpmDependencies": {
     "com.vrchat.worlds": "3.x.x",
-    "com.nomlas.nomseekvrc": "0.1.x"
+    "com.nomlas.nomseekvrc": "0.2.x"
   },
   "author": {
     "name": "Nomlas"
