@@ -83,7 +83,6 @@ namespace Nomlas.NomSeekVRC.Editor
             }
 
             Selection.activeObject = savedPrefab; //Udonのセットアップを誘導
-            EditorGUIUtility.PingObject(savedPrefab);
             EditorUtility.DisplayDialog("Success", $"Prefabを保存しました:\n{prefabPath}", "OK");
             DestroyImmediate(go);
         }
