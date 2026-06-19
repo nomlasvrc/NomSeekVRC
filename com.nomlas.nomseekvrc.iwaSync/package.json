@@ -6,7 +6,7 @@
   "description": "NomSeek iwaSync Connector by nomlasvrc",
   "vpmDependencies": {
     "com.vrchat.worlds": "3.x.x",
-    "com.nomlas.nomseekvrc": "0.x.x"
+    "com.nomlas.nomseekvrc": "0.1.x"
   },
   "author": {
     "name": "Nomlas"

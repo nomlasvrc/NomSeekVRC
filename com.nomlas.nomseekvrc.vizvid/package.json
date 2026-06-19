@@ -6,8 +6,8 @@
   "description": "NomSeek VizVid Connector by nomlasvrc",
   "vpmDependencies": {
     "com.vrchat.worlds": "3.x.x",
-    "com.nomlas.nomseekvrc": "0.x.x",
-    "idv.jlchntoz.vvmw": "x.x.x"
+    "com.nomlas.nomseekvrc": "0.1.x",
+    "idv.jlchntoz.vvmw": "1.x.x"
   },
   "author": {
     "name": "Nomlas"
