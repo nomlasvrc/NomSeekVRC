@@ -2,32 +2,20 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
-
-using Yamadev.YamaStream;
 
 namespace Nomlas.NomSeekVRC
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [RequireComponent(typeof(NomSeekYamaModule))]
     public class YamaPlayerConnector : NomSeekConnector
     {
-        [SerializeField] private Controller yamaController;
-        [SerializeField] private VideoPlayerType videoPlayerType = VideoPlayerType.AVProVideoPlayer;
-        public override void ChangeURL(VRCUrl vrcUrl, string title)
-        {
-            var track = Track.New(videoPlayerType, title, vrcUrl);
-            if (yamaController.Stopped && !yamaController.IsLoading)
-            {
-                yamaController.TakeOwnership();
-                yamaController.PlayTrack(track);
-            }
-            else
-            {
-                yamaController.Queue.TakeOwnership();
-                yamaController.Queue.AddTrack(track);
-            }
-        }
+        private NomSeekYamaModule module;
 
-        public override bool IsValid => yamaController != null;
+        private void Start()
+        {
+            module = GetComponent<NomSeekYamaModule>();
+        }
+        public override void ChangeURL(VRCUrl vrcUrl, string title) => module.PlayOrAddQueue(vrcUrl, title);
+        public override bool IsValid => true;
     }
 }
