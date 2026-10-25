@@ -8,7 +8,6 @@ namespace Nomlas.NomSeekVRC.Editor
 {
     public class NomSeekPrefabCreatorWindow : EditorWindow
     {
-        internal const string ConsentKey = "Nomlas.NomSeekVRC.AgreeApiUsage";
         internal const string OutputDirectory = "Assets/Nomlas/NomSeek";
         internal const string PrefabName = "VRCURLSetter";
 
@@ -21,23 +20,11 @@ namespace Nomlas.NomSeekVRC.Editor
             GetWindow<NomSeekPrefabCreatorWindow>("NomSeek Prefab Creator");
         }
 
-/*
-        [MenuItem("Tools/NomSeekVRC/同意状態のリセット")]
-        private static void ResetApiConsent() => EditorPrefs.SetBool(ConsentKey, false);
-*/
-
         private void OnGUI()
         {
             EditorGUILayout.LabelField("Prefab Creator", EditorStyles.boldLabel);
 
             EditorGUILayout.Space();
-
-            bool agreed = EditorPrefs.GetBool(ConsentKey, false);
-            if (!agreed)
-            {
-                DrawConsentSection();
-                return;
-            }
 
             worldId = EditorGUILayout.TextField("World ID", worldId);
             EditorGUILayout.HelpBox("APIが識別に使うためのワールド固有のIDを設定してください。\n英子文字・数字・アンダースコア・ハイフンのみ使用可能です", MessageType.None);
@@ -49,9 +36,7 @@ namespace Nomlas.NomSeekVRC.Editor
 
             EditorGUILayout.Space();
 
-            bool canCreate = agreed && IsValid(worldId);
-
-            EditorGUI.BeginDisabledGroup(!canCreate);
+            EditorGUI.BeginDisabledGroup(!IsValid(worldId));
             if (GUILayout.Button("Prefabを作成"))
             {
                 CreatePrefab();
@@ -85,23 +70,6 @@ namespace Nomlas.NomSeekVRC.Editor
             Selection.activeObject = savedPrefab; //Udonのセットアップを誘導
             EditorUtility.DisplayDialog("Success", $"Prefabを保存しました:\n{prefabPath}", "OK");
             DestroyImmediate(go);
-        }
-
-        private static void DrawConsentSection()
-        {
-            EditorGUILayout.LabelField("API 利用同意", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(consentText + "\n以上に同意しますか？", MessageType.Warning);
-
-            EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("同意しない"))
-            {
-                EditorPrefs.SetBool(ConsentKey, false);
-            }
-            if (GUILayout.Button("同意する"))
-            {
-                EditorPrefs.SetBool(ConsentKey, true);
-            }
-            EditorGUILayout.EndHorizontal();
         }
 
         private static void GeneratedUrls(VRCURLSetter setter, string worldId, int poolSize)
@@ -149,8 +117,5 @@ namespace Nomlas.NomSeekVRC.Editor
             const string pattern = @"^[a-z0-9_-]+$";
             return Regex.IsMatch(worldId, pattern);
         }
-
-        // 以下の文章を変更してはなりません。
-        private const string consentText = "本アセットは、Lamp氏が提供する「VRChat YouTube Search API」を使用しています。\n本アセットおよび当該APIの利用または利用不能に起因して利用者に発生した損害（直接的・間接的・特別・偶発的・結果的損害を含むがこれらに限りません）について、製作者である「のむらす」は一切の責任を負わないものとします。";
     }
 }

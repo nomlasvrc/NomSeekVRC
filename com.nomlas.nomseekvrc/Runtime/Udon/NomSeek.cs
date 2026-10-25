@@ -44,7 +44,7 @@ namespace Nomlas.NomSeekVRC
         private string[] channelName;
         private string[] description;
         private string[] id;
-        private int[] length;
+        private string[] length;
         private bool[] live;
         private Rect[] thumbnail;
         private bool[] thumbnail_isValid;
@@ -243,7 +243,7 @@ namespace Nomlas.NomSeekVRC
             channelName = new string[videoCount_tmp];
             description = new string[videoCount_tmp];
             id = new string[videoCount_tmp];
-            length = new int[videoCount_tmp];
+            length = new string[videoCount_tmp];
             live = new bool[videoCount_tmp];
             thumbnail = new Rect[videoCount_tmp];
             thumbnail_isValid = new bool[videoCount_tmp];
@@ -268,11 +268,11 @@ namespace Nomlas.NomSeekVRC
                 title[i] = GetValueFromDic("title", videoData);
                 description[i] = GetValueFromDic("description", videoData);
                 uploaded[i] = GetValueFromDic("uploaded", videoData);
-                length[i] = TimeToSeconds(GetValueFromDic("lengthText", videoData));
+                length[i] = GetValueFromDic("lengthText", videoData);
 
                 string videoData_viewCountText = GetValueFromDic("viewCountText", videoData);
                 string videoData_shortViewCountText = GetValueFromDic("shortViewCountText", videoData);
-                viewCount[i] = string.IsNullOrWhiteSpace(videoData_viewCountText) ? videoData_shortViewCountText : FormatViews(videoData_viewCountText, videoData_live); // viewCountTextが渡されなかった場合、shortViewをそのまま使用
+                viewCount[i] = !string.IsNullOrWhiteSpace(videoData_viewCountText) ? videoData_viewCountText : videoData_shortViewCountText; // viewCountTextが渡されなかった場合、shortViewをそのまま使用
 
                 // --- Rect ---
                 bool videoData_thumbnail_isValid = false;

@@ -10,7 +10,7 @@ namespace Nomlas.NomSeekVRC
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class VRCURLSetter : UdonSharpBehaviour
     {
-        public const string apiEndpoint = "https://api.u2b.cx";
+        public const string apiEndpoint = "https://y2b.nmls.workers.dev";
         [SerializeField] internal VRCUrl[] urls;
         [SerializeField] internal VRCUrl defaultVRCUrl;
         [SerializeField] internal string needUrl;
