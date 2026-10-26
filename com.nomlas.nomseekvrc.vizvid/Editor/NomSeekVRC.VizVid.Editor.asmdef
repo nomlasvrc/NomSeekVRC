@@ -1,0 +1,29 @@
+{
+    "name": "NomSeekVRC.VizVid.Editor",
+    "rootNamespace": "",
+    "references": [
+        "NomSeekVRC.Editor",
+        "NomSeekVRC",
+        "NomSeekVRC.VizVid",
+        "UdonSharp.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "NOMSEEK_VIZVID"
+    ],
+    "versionDefines": [
+        {
+            "name": "idv.jlchntoz.vvmw",
+            "expression": "",
+            "define": "NOMSEEK_VIZVID"
+        }
+    ],
+    "noEngineReferences": false
+}

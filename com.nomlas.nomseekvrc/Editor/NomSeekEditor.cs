@@ -45,7 +45,7 @@ namespace Nomlas.NomSeekVRC.Editor
                 }
             }
 
-            DrawConnectorInspector(nomSeek);
+            NomSeekConnectorInspector.Draw(serializedObject.FindProperty("connector"), nomSeek.transform);
 
             EditorGUILayout.Space();
 
@@ -64,73 +64,6 @@ namespace Nomlas.NomSeekVRC.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawConnectorInspector(NomSeek nomSeek)
-        {
-            bool iwaSync =
-#if IWASYNC_CONNECTOR
-            true
-#else
-            false
-#endif
-            ;
-
-            bool vizVid =
-#if VIZVID_CONNECTOR
-            true
-#else
-            false
-#endif
-            ;
-
-            bool yamaPlayer =
-#if YAMA_CONNECTOR
-            true
-#else
-            false
-#endif
-            ;
-
-            string iwaSyncPath = "Packages/com.nomlas.nomseekvrc.iwasync/Runtime/iwaSyncConnector.prefab";
-            string vizVidPath = "Packages/com.nomlas.nomseekvrc.vizvid/Runtime/VizVidConnector.prefab";
-            string yamaPlayerPath = "Packages/com.nomlas.nomseekvrc.yamaplayer/Runtime/YamaPlayerConnector.prefab";
-
-            EditorGUILayout.LabelField("Connectors", EditorStyles.boldLabel);
-            if (!iwaSync && !vizVid && !yamaPlayer)
-            {
-                EditorGUILayout.HelpBox("利用可能なコネクターがありません。VCCまたはALCOMでインポートしてください。", MessageType.Warning);
-                return;
-            }
-            if (nomSeek.connector == null)
-            {
-                if (iwaSync && GUILayout.Button("iwaSync Connector"))
-                {
-                    nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, iwaSyncPath);
-                    EditorUtility.SetDirty(nomSeek);
-                }
-                if (vizVid && GUILayout.Button("VizVid Connector"))
-                {
-                    nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, vizVidPath);
-                    EditorUtility.SetDirty(nomSeek);
-                }
-                if (yamaPlayer)
-                {
-                    EditorGUILayout.HelpBox("YamaPlayerからモジュールとして追加して設定してください。", MessageType.Info);
-                    EditorGUI.BeginDisabledGroup(true);
-                    if (GUILayout.Button("YamaPlayer Connector"))
-                    {
-                        nomSeek.connector = LoadAndPlacePrefab<NomSeekConnector>(nomSeek, yamaPlayerPath);
-                        EditorUtility.SetDirty(nomSeek);
-                    }
-                    EditorGUI.EndDisabledGroup();
-                }
-                EditorGUILayout.HelpBox("コネクターをシーン上に配置し、適切な連携設定を行った後、「Connector」欄に指定してください。", MessageType.Info);
-            }
-            if (nomSeek.connector != null && !nomSeek.connector.IsValid)
-            {
-                EditorGUILayout.HelpBox("指定されたコネクターが正しく設定されていません。", MessageType.Warning);
-            }
-        }
-
         private T LoadAndPlacePrefab<T>(NomSeek nomSeek, string prefabPath) where T : Component
         {
             var comp = nomSeek.GetComponentInChildren<T>();
@@ -143,7 +76,7 @@ namespace Nomlas.NomSeekVRC.Editor
             if (prefab != null)
             {
                 GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab, nomSeek.transform);
-                Undo.RegisterCreatedObjectUndo(instance, "Place Connector Prefab");
+                Undo.RegisterCreatedObjectUndo(instance, $"Place {typeof(T).Name} Prefab");
                 return instance.GetComponent<T>();
             }
             else
