@@ -30,8 +30,3 @@ prefab位置<br>
 
 すべて指定済みの状態（例）<br>
 <img alt="image" src="https://github.com/user-attachments/assets/3e5fe127-f767-4144-b1e1-b29b13d3dc28" /><br>
-
-
-### 免責事項
-本アセットは、Lamp氏が提供する「[VRChat YouTube Search API](https://www.u2b.cx/)」を使用しています。
-本アセットおよび当該APIの利用または利用不能に起因して利用者に発生した損害（直接的・間接的・特別・偶発的・結果的損害を含むがこれらに限りません）について、製作者である「のむらす」は一切の責任を負わないものとします。

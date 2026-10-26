@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moduleName: NomSeek YamaPlayer Connector Module
   moduleDescription: "NomSeek\u306BYamaPlayer\u3092\u63A5\u7D9A\u3057\u307E\u3059"
-  version: 0.1.2
+  version: 0.3.0-beta.3
   allowMultiple: 0
   noNeedSetUp: 0
   uiSlots: []
