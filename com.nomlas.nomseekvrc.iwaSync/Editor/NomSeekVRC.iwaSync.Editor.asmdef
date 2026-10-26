@@ -1,0 +1,21 @@
+{
+    "name": "NomSeekVRC.iwaSync.Editor",
+    "rootNamespace": "",
+    "references": [
+        "NomSeekVRC.Editor",
+        "NomSeekVRC",
+        "NomSeekVRC.iwaSync",
+        "UdonSharp.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

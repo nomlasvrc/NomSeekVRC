@@ -1,0 +1,29 @@
+{
+    "name": "NomSeekVRC.YamaPlayer.Editor",
+    "rootNamespace": "",
+    "references": [
+        "NomSeekVRC.Editor",
+        "NomSeekVRC",
+        "NomSeekVRC.YamaPlayer",
+        "UdonSharp.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "NOMSEEK_YAMAPLAYER"
+    ],
+    "versionDefines": [
+        {
+            "name": "net.kwxxw.yama-stream",
+            "expression": "",
+            "define": "NOMSEEK_YAMAPLAYER"
+        }
+    ],
+    "noEngineReferences": false
+}
